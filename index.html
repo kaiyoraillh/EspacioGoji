@@ -368,27 +368,18 @@
     .galeria-header { margin-bottom: 3.5rem; }
     .galeria-grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: auto;
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
-    .g-item { overflow: hidden; cursor: pointer; }
-    .g-item img, .g-item video {
+    .g-item { overflow: hidden; cursor: pointer; aspect-ratio: 4/3; }
+    .g-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
       transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .g-item:hover img, .g-item:hover video { transform: scale(1.04); }
-    .g-1 { grid-column: 1 / 8; grid-row: 1; aspect-ratio: 16/9; }
-    .g-2 { grid-column: 8 / 13; grid-row: 1; aspect-ratio: 1/1; }
-    .g-3 { grid-column: 1 / 5; grid-row: 2; aspect-ratio: 16/9; }
-    .g-4 { grid-column: 5 / 9; grid-row: 2; aspect-ratio: 16/9; }
-    .g-5 { grid-column: 9 / 13; grid-row: 2; aspect-ratio: 16/9; }
-    .g-6 { grid-column: 1 / 6; grid-row: 3; aspect-ratio: 16/9; }
-    .g-7 { grid-column: 6 / 10; grid-row: 3; aspect-ratio: 16/9; }
-    .g-8 { grid-column: 10 / 13; grid-row: 3; aspect-ratio: 16/9; }
+    .g-item:hover img { transform: scale(1.04); }
 
     /* ===== LIGHTBOX ===== */
     .lightbox {
@@ -632,14 +623,7 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
       }
-      .g-1 { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16/9; }
-      .g-2 { grid-column: 1; grid-row: auto; aspect-ratio: 4/3; }
-      .g-3 { grid-column: 2; grid-row: auto; aspect-ratio: 4/3; }
-      .g-4 { grid-column: 1; grid-row: auto; aspect-ratio: 4/3; }
-      .g-5 { grid-column: 2; grid-row: auto; aspect-ratio: 4/3; }
-      .g-6 { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16/9; }
-      .g-7 { grid-column: 1; grid-row: auto; aspect-ratio: 4/3; }
-      .g-8 { grid-column: 2; grid-row: auto; aspect-ratio: 4/3; }
+      .galeria-grid { grid-template-columns: repeat(2, 1fr); }
 
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
@@ -856,31 +840,23 @@
     </div>
     <div style="padding: 0 clamp(1.25rem, 5vw, 4rem);">
       <div class="galeria-grid">
-        <div class="g-item g-1" onclick="openLightbox(this)">
-          <img src="assets/imagenes goji/Foto lugar.jpg" alt="Espacio Goji interior" loading="lazy" />
+        <div class="g-item" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Aire libre.jpg" alt="Aire libre" loading="lazy" />
         </div>
-        <div class="g-item g-2" onclick="openLightbox(this)">
-          <img src="assets/imagenes goji/Goji de noche.jpg" alt="Espacio Goji de noche" loading="lazy" />
+        <div class="g-item" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Aire libre2.jpg" alt="Aire libre 2" loading="lazy" />
         </div>
-        <div class="g-item g-3" onclick="openLightbox(this)">
-          <img src="assets/imagenes goji/Aire libre.jpg" alt="Area al aire libre" loading="lazy" />
+        <div class="g-item" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Foto lugar mas lejos.jpg" alt="Vista general" loading="lazy" />
         </div>
-        <div class="g-item g-4" onclick="openLightbox(this)">
-          <img src="assets/imagenes goji/Goji de noche2.jpg" alt="Espacio Goji nocturno" loading="lazy" />
+        <div class="g-item" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Foto Galeria1.jpg" alt="Galeria" loading="lazy" />
         </div>
-        <div class="g-item g-5" onclick="openLightbox(this)">
-          <img src="assets/imagenes goji/Foto relleno.jpg" alt="Detalles del espacio" loading="lazy" />
+        <div class="g-item" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Goji de noche.jpg" alt="Goji de noche" loading="lazy" />
         </div>
-        <div class="g-item g-6" style="cursor:default; pointer-events:none;">
-          <video id="galeriaVideo" muted loop playsinline poster="assets/imagenes goji/Foto lugar mas lejos.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
-            <source src="assets/videos goji/espaciogoji_1762787073_3762852957311420275_10993797066.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="g-item g-7" onclick="openLightbox(this)">
-          <img src="assets/imagenes goji/Goji de noche3.jpg" alt="Espacio Goji nocturno 3" loading="lazy" />
-        </div>
-        <div class="g-item g-8" onclick="openLightbox(this)">
-          <img src="assets/imagenes goji/Aire libre2.jpg" alt="Vista panoramica" loading="lazy" style="object-position: center 90%;" />
+        <div class="g-item" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Goji de noche3.jpg" alt="Goji de noche 3" loading="lazy" />
         </div>
       </div>
     </div>
@@ -1008,20 +984,7 @@
   </a>
 
 <script>
-    // Video autoplay on scroll
-    const galeriaVideo = document.getElementById('galeriaVideo');
-    const videoObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          galeriaVideo.play();
-        } else {
-          galeriaVideo.pause();
-        }
-      });
-    }, { threshold: 0.3 });
-    videoObserver.observe(galeriaVideo);
-
-    // Mobile nav
+// Mobile nav
     const toggle = document.getElementById('navToggle');
     const mobileMenu = document.getElementById('navMobile');
     toggle.addEventListener('click', () => {
