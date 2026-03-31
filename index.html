@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espacio Goji — Tu espacio para cada ocasion</title>
+  <meta name="description" content="Espacio Goji — Salon de eventos, ferias y festivales en Ingeniero Maschwitz, Buenos Aires." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== TOKENS ===== */
+    :root {
+      --surface:           #fffad9;
+      --surface-low:       #fcf7ae;
+      --surface-high:      #eae59e;
+      --surface-glass:     rgba(255, 250, 217, 0.80);
+      --primary:           #b30069;
+      --primary-bright:    #df0e84;
+      --primary-container: #f5c8df;
+      --on-primary:        #ffffff;
+      --on-surface:        #1e1c00;
+      --outline:           #8d6f79;
+      --outline-variant:   rgba(225, 189, 200, 0.20);
+      --mark:              #b30069;
+      --sp-section:        clamp(5rem, 10vw, 8.5rem);
+      --sp-6:              2rem;
+      --sp-3:              1rem;
+      --sp-8:              2.75rem;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--surface);
+      color: var(--on-surface);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ===== TYPOGRAPHY ===== */
+    .display-lg {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .headline-lg {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+    .title-lg {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.375rem;
+      line-height: 1.4;
+    }
+    .body-lg {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .label-md {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 4rem);
+    }
+
+    /* ===== MARK ===== */
+    .section-mark {
+      display: block;
+      width: 10%;
+      min-width: 3rem;
+      height: 4px;
+      background: var(--mark);
+      margin-bottom: 2rem;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--primary-bright));
+      color: var(--on-primary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: var(--sp-3) var(--sp-8);
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms;
+    }
+    .btn-primary:hover { background: var(--primary-container); color: var(--primary); }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--primary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0;
+      border: none;
+      border-bottom: 2px solid var(--primary);
+      border-radius: 0;
+      cursor: pointer;
+      transition: opacity 200ms;
+    }
+    .btn-secondary:hover { opacity: 0.7; }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface-high);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 5.5rem;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .nav-logo img {
+      width: 5.25rem;
+      height: 5.25rem;
+      object-fit: contain;
+    }
+    .nav-logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--on-surface);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--on-surface);
+      position: relative;
+      transition: color 200ms;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 200ms;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--on-surface);
+      transition: transform 300ms, opacity 300ms;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      background: var(--surface);
+      border-top: 1px solid var(--outline-variant);
+      padding: 1.5rem clamp(1.25rem, 5vw, 4rem) 2rem;
+      gap: 1.25rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--on-surface);
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      background: var(--surface);
+      height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 5.5rem;
+    }
+    .hero-content {
+      padding: 0;
+    }
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(3.25rem, 10vw, 8rem);
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 0.92;
+      color: var(--on-surface);
+    }
+    .hero-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--outline);
+      margin: 2rem 0 2.75rem;
+      max-width: 420px;
+    }
+    .hero-location {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--outline);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===== SECTION BASE ===== */
+    section { padding: var(--sp-section) 0; }
+    #inicio { padding: 0; }
+
+    /* ===== NOSOTROS ===== */
+    #nosotros { background: var(--surface-low); }
+    .nosotros-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .nosotros-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .nosotros-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nosotros-img:hover img { transform: scale(1.04); }
+    .nosotros-text .headline-lg { margin-bottom: 1.5rem; }
+    .nosotros-text .body-lg { margin-bottom: 1.5rem; }
+    .nosotros-address {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--outline);
+      margin-top: 2rem;
+    }
+
+    /* ===== INSTALACIONES ===== */
+    #instalaciones { background: var(--surface); }
+    .instalaciones-header { margin-bottom: 3.5rem; }
+    .instalaciones-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0;
+    }
+    .instalacion-item {
+      padding: 2rem;
+      background: var(--surface);
+      transition: background 200ms;
+    }
+    .instalacion-item:hover { background: var(--surface-high); }
+    .instalacion-icon {
+      width: 2.25rem;
+      height: 2.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .instalacion-item .title-lg {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .instalacion-item .body-lg { font-size: 0.875rem; color: var(--outline); }
+
+    /* ===== SERVICIOS ===== */
+    #servicios { background: var(--surface-low); }
+    .servicios-header { margin-bottom: 3.5rem; }
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .servicio-card {
+      padding: 3rem 2.5rem;
+      background: var(--surface-low);
+      transition: background 200ms;
+      cursor: default;
+    }
+    .servicio-card:hover { background: var(--surface-high); }
+    .servicio-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--primary);
+      opacity: 0.18;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .servicio-card .headline-lg { margin-bottom: 1rem; font-size: 1.3rem; }
+    .servicio-card .body-lg { color: var(--outline); }
+
+    /* ===== GALERIA ===== */
+    #galeria { background: var(--surface); }
+    .galeria-header { margin-bottom: 3.5rem; }
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 12px;
+    }
+    .g-item { overflow: hidden; cursor: pointer; }
+    .g-item img, .g-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .g-item:hover img, .g-item:hover video { transform: scale(1.04); }
+    .g-1 { grid-column: 1 / 8; grid-row: 1; aspect-ratio: 16/9; }
+    .g-2 { grid-column: 8 / 13; grid-row: 1; aspect-ratio: 1/1; }
+    .g-3 { grid-column: 1 / 5; grid-row: 2; aspect-ratio: 16/9; }
+    .g-4 { grid-column: 5 / 9; grid-row: 2; aspect-ratio: 16/9; }
+    .g-5 { grid-column: 9 / 13; grid-row: 2; aspect-ratio: 16/9; }
+    .g-6 { grid-column: 1 / 6; grid-row: 3; aspect-ratio: 16/9; }
+    .g-7 { grid-column: 6 / 10; grid-row: 3; aspect-ratio: 16/9; }
+    .g-8 { grid-column: 10 / 13; grid-row: 3; aspect-ratio: 16/9; }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(30,28,0,0.92);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+    .lightbox-inner img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      display: block;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.75rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ===== FORMULARIO ===== */
+    #contacto { background: var(--surface-low); }
+    .form-header { margin-bottom: 3.5rem; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 3rem;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .form-group.full-width { grid-column: 1 / -1; }
+    .form-group label {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--outline);
+      margin-bottom: 0.5rem;
+      transition: color 200ms;
+    }
+    .form-group:focus-within label { color: var(--primary); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--outline);
+      border-radius: 0;
+      padding: 0.5rem 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: var(--on-surface);
+      outline: none;
+      transition: border-color 200ms;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238d6f79' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.25rem center;
+      padding-right: 1.5rem;
+      cursor: pointer;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-bottom: 2px solid var(--primary);
+    }
+    .form-group textarea { resize: none; min-height: 80px; }
+
+    /* Checkboxes */
+    .checkboxes-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--outline);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .checkboxes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem 1.5rem;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .checkbox-item label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--on-surface);
+      cursor: pointer;
+    }
+    .checkbox-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 1.1rem;
+      height: 1.1rem;
+      border: 1.5px solid var(--outline);
+      border-radius: 0;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      transition: border-color 200ms, background 200ms;
+    }
+    .checkbox-item input[type="checkbox"]:checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .checkbox-item input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 4px;
+      height: 7px;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(45deg);
+    }
+    .form-submit {
+      margin-top: 1.5rem;
+    }
+    .form-submit .btn-primary {
+      padding: 1.25rem 3.5rem;
+      min-width: 300px;
+      text-align: center;
+    }
+    .form-success {
+      display: none;
+      background: var(--surface-high);
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+    }
+    .form-success.visible { display: block; }
+    .form-success p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* ===== FOOTER ===== */
+    #footer {
+      background: var(--on-surface);
+      padding: 2.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .footer-logo {
+      width: 11rem;
+      height: 11rem;
+      object-fit: contain;
+      display: block;
+    }
+    .footer-social {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .footer-social a {
+      color: rgba(255,250,217,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-social a:hover { color: var(--primary-bright); }
+    .footer-legal {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,250,217,0.3);
+      margin-top: 0.5rem;
+    }
+
+    /* ===== WHATSAPP FLOAT ===== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 900;
+      width: 3.75rem;
+      height: 3.75rem;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.22);
+      transition: transform 200ms;
+    }
+    .whatsapp-float:hover { transform: scale(1.08); }
+    .whatsapp-float svg { width: 2rem; height: 2rem; fill: #fff; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .nosotros-grid { grid-template-columns: 1fr; }
+      .nosotros-img { max-width: 600px; aspect-ratio: 16/9; }
+      .servicios-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 768px) {
+      .checkboxes-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+
+      .servicios-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: 1; }
+
+      /* Gallery mobile */
+      .galeria-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .g-1 { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16/9; }
+      .g-2 { grid-column: 1; grid-row: auto; aspect-ratio: 4/3; }
+      .g-3 { grid-column: 2; grid-row: auto; aspect-ratio: 4/3; }
+      .g-4 { grid-column: 1; grid-row: auto; aspect-ratio: 4/3; }
+      .g-5 { grid-column: 2; grid-row: auto; aspect-ratio: 4/3; }
+      .g-6 { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16/9; }
+      .g-7 { grid-column: 1; grid-row: auto; aspect-ratio: 4/3; }
+      .g-8 { grid-column: 2; grid-row: auto; aspect-ratio: 4/3; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .galeria-grid { grid-template-columns: 1fr; }
+      .g-1, .g-2, .g-3, .g-4, .g-5, .g-6, .g-7, .g-8 {
+        grid-column: 1;
+        aspect-ratio: 4/3;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#inicio" class="nav-logo">
+          <img src="assets/imagenes goji/Logo Goji Png.png" alt="Espacio Goji logo" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="#inicio" class="nav-mobile-link">Inicio</a>
+      <a href="#nosotros" class="nav-mobile-link">Nosotros</a>
+      <a href="#servicios" class="nav-mobile-link">Servicios</a>
+      <a href="#galeria" class="nav-mobile-link">Galeria</a>
+      <a href="#contacto" class="nav-mobile-link">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="inicio">
+    <div id="hero">
+      <div class="hero-content container">
+        <p class="hero-location">Ingeniero Maschwitz, Buenos Aires</p>
+        <h1 class="hero-title">Espacio<br>Goji</h1>
+        <p class="hero-subtitle">Tu espacio para cada ocasion</p>
+        <a href="#contacto" class="btn-primary">Consultar disponibilidad</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NOSOTROS ===== -->
+  <section id="nosotros">
+    <div class="container">
+      <div class="nosotros-grid">
+        <div class="nosotros-img">
+          <img src="assets/imagenes goji/Foto lugar mas lejos.jpg" alt="Vista general de Espacio Goji" loading="lazy" />
+        </div>
+        <div class="nosotros-text">
+          <span class="section-mark"></span>
+          <h2 class="headline-lg">Nosotros</h2>
+          <p class="body-lg" style="margin-top: 1.5rem;">
+            Espacio Goji es un espacio de alquiler ubicado en Ingeniero Maschwitz, ideal para eventos sociales, ferias y festivales. Un entorno verde, climatizado y completamente equipado para que cada ocasion sea unica.
+          </p>
+          <p class="body-lg">
+            Contamos con un parque arbolado de 2000 m2 con pileta, carpa exterior y todas las instalaciones que necesitas para celebrar sin preocupaciones.
+          </p>
+          <a href="https://www.google.com/maps/place/Espacio+Goji/@-34.3795653,-58.7471844,17z" target="_blank" rel="noopener" class="nosotros-address label-md" style="margin-top: 2rem; color: var(--outline); display: inline-block;">
+            El Dorado 2336, Ingeniero Maschwitz, Buenos Aires
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INSTALACIONES ===== -->
+  <section id="instalaciones">
+    <div class="container">
+      <div class="instalaciones-header">
+        <span class="section-mark"></span>
+        <h2 class="headline-lg">Instalaciones incluidas</h2>
+        <p class="body-lg" style="margin-top: 1rem; max-width: 540px; color: var(--outline);">
+          Todo lo que necesitas esta incluido.
+        </p>
+      </div>
+      <div class="instalaciones-grid">
+
+        <div class="instalacion-item">
+          <svg class="instalacion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/>
+          </svg>
+          <p class="title-lg">Wifi</p>
+          <p class="body-lg">Conexion a internet de alta velocidad</p>
+        </div>
+
+        <div class="instalacion-item">
+          <svg class="instalacion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+          </svg>
+          <p class="title-lg">Cafetera</p>
+          <p class="body-lg">Para empezar bien cada momento</p>
+        </div>
+
+        <div class="instalacion-item">
+          <svg class="instalacion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <p class="title-lg">Guirnalda exterior</p>
+          <p class="body-lg">Luces de ambiente para el exterior</p>
+        </div>
+
+        <div class="instalacion-item">
+          <svg class="instalacion-icon" viewBox="0 0 40 40" fill="none" stroke="#E91E8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="17" x2="36" y2="17"/>
+            <line x1="10" y1="17" x2="8" y2="34"/>
+            <line x1="30" y1="17" x2="32" y2="34"/>
+            <line x1="8" y1="27" x2="32" y2="27"/>
+          </svg>
+          <p class="title-lg">10 mesas + 30 sillas</p>
+          <p class="body-lg">Mesas de 70x70 cm incluidas</p>
+        </div>
+
+        <div class="instalacion-item">
+          <svg class="instalacion-icon" viewBox="0 0 40 40" fill="none" stroke="#E91E8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="8" width="30" height="26" rx="1"/>
+            <line x1="5" y1="14" x2="35" y2="14"/>
+            <rect x="9" y="18" width="22" height="12" rx="1"/>
+            <circle cx="13" cy="11" r="2"/>
+            <circle cx="20" cy="11" r="2"/>
+            <circle cx="27" cy="11" r="2"/>
+          </svg>
+          <p class="title-lg">Heladera y horno</p>
+          <p class="body-lg">Heladera vertical y horno electrico</p>
+        </div>
+
+        <div style="grid-column: 1 / -1; display: flex; justify-content: center; flex-wrap: wrap;">
+
+          <div class="instalacion-item">
+            <svg class="instalacion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+            </svg>
+            <p class="title-lg">Aire acondicionado</p>
+            <p class="body-lg">Frio-calor para todo el ano</p>
+          </div>
+
+          <div class="instalacion-item">
+            <svg class="instalacion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <p class="title-lg">Parque de 2000 m2</p>
+            <p class="body-lg">Parque arbolado con pileta</p>
+          </div>
+
+          <div class="instalacion-item">
+            <svg class="instalacion-icon" viewBox="0 0 40 40" fill="none" stroke="#E91E8C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="14" width="32" height="18"/>
+              <polyline points="2,14 20,7 38,14"/>
+              <line x1="15" y1="32" x2="15" y2="22"/>
+              <line x1="25" y1="32" x2="25" y2="22"/>
+              <line x1="15" y1="22" x2="25" y2="22"/>
+            </svg>
+            <p class="title-lg">Carpa exterior</p>
+            <p class="body-lg">12 m x 6 m para eventos al aire libre</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICIOS ===== -->
+  <section id="servicios">
+    <div class="container">
+      <div class="servicios-header">
+        <span class="section-mark"></span>
+        <h2 class="headline-lg">Servicios</h2>
+        <p class="body-lg" style="margin-top: 1rem; max-width: 540px; color: var(--outline);">
+          Alquilamos el espacio para distintos tipos de eventos.
+        </p>
+      </div>
+      <div class="servicios-grid">
+        <div class="servicio-card">
+          <div class="servicio-number">01</div>
+          <h3 class="headline-lg">Salon de eventos</h3>
+          <p class="body-lg">Cumpleanos, bautismos, bodas, juntadas y todo tipo de celebraciones con familia y amigos en un entorno unico.</p>
+        </div>
+        <div class="servicio-card">
+          <div class="servicio-number">02</div>
+          <h3 class="headline-lg">Ferias</h3>
+          <p class="body-lg">Espacio amplio y versatil para ferias de emprendedores, mercados y exposiciones en un entorno al aire libre.</p>
+        </div>
+        <div class="servicio-card">
+          <div class="servicio-number">03</div>
+          <h3 class="headline-lg">Festivales</h3>
+          <p class="body-lg">Parque de 2000 m2 con carpa exterior, ideal para festivales de musica, gastronomia y arte al aire libre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALERIA ===== -->
+  <section id="galeria">
+    <div class="container">
+      <div class="galeria-header">
+        <span class="section-mark"></span>
+        <h2 class="headline-lg">El espacio</h2>
+      </div>
+    </div>
+    <div style="padding: 0 clamp(1.25rem, 5vw, 4rem);">
+      <div class="galeria-grid">
+        <div class="g-item g-1" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Foto lugar.jpg" alt="Espacio Goji interior" loading="lazy" />
+        </div>
+        <div class="g-item g-2" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Goji de noche.jpg" alt="Espacio Goji de noche" loading="lazy" />
+        </div>
+        <div class="g-item g-3" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Aire libre.jpg" alt="Area al aire libre" loading="lazy" />
+        </div>
+        <div class="g-item g-4" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Goji de noche2.jpg" alt="Espacio Goji nocturno" loading="lazy" />
+        </div>
+        <div class="g-item g-5" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Foto relleno.jpg" alt="Detalles del espacio" loading="lazy" />
+        </div>
+        <div class="g-item g-6" style="cursor:default; pointer-events:none;">
+          <video id="galeriaVideo" muted loop playsinline poster="assets/imagenes goji/Foto lugar mas lejos.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <source src="assets/videos goji/espaciogoji_1762787073_3762852957311420275_10993797066.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="g-item g-7" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Goji de noche3.jpg" alt="Espacio Goji nocturno 3" loading="lazy" />
+        </div>
+        <div class="g-item g-8" onclick="openLightbox(this)">
+          <img src="assets/imagenes goji/Aire libre2.jpg" alt="Vista panoramica" loading="lazy" style="object-position: center 90%;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-inner" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">&#215;</button>
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+  </div>
+
+  <!-- ===== FORMULARIO ===== -->
+  <section id="contacto">
+    <div class="container">
+      <div class="form-header">
+        <span class="section-mark"></span>
+        <h2 class="headline-lg">Consulta tu fecha</h2>
+        <p class="body-lg" style="margin-top: 1rem; max-width: 540px; color: var(--outline);">
+          Completá el formulario y nos ponemos en contacto para confirmar disponibilidad.
+        </p>
+      </div>
+      <form id="consultaForm" novalidate>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="email">Correo electronico *</label>
+            <input type="email" id="email" name="email" required  />
+          </div>
+
+          <div class="form-group">
+            <label for="nombre">Nombre y Apellido *</label>
+            <input type="text" id="nombre" name="nombre" required  />
+          </div>
+
+          <div class="form-group">
+            <label for="domicilio">Domicilio *</label>
+            <input type="text" id="domicilio" name="domicilio" required  />
+          </div>
+
+          <div class="form-group">
+            <label for="whatsapp">Numero de WhatsApp *</label>
+            <input type="tel" id="whatsapp" name="whatsapp" required  />
+          </div>
+
+          <div class="form-group">
+            <label for="motivo">Motivo del alquiler *</label>
+            <input type="text" id="motivo" name="motivo" required />
+          </div>
+
+          <div class="form-group">
+            <label for="fecha">Fecha del evento *</label>
+            <input type="date" id="fecha" name="fecha" required />
+          </div>
+
+          <div class="form-group">
+            <label for="dias">Dias de alquiler *</label>
+            <input type="number" id="dias" name="dias" required min="1"/>
+          </div>
+
+          <div class="form-group">
+            <label for="personas">Cantidad de personas *</label>
+            <input type="number" id="personas" name="personas" required min="1"  />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="horas">Cantidad de horas *</label>
+            <input type="number" id="horas" name="horas" required min="1"  style="max-width: 200px;" />
+          </div>
+
+          <div class="form-group full-width">
+            <span class="checkboxes-label">Servicios extras (opcional)</span>
+            <div class="checkboxes-grid">
+              <div class="checkbox-item"><input type="checkbox" id="cb-sillas" name="extras" value="Sillas" /><label for="cb-sillas">Sillas</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-mesas" name="extras" value="Mesas" /><label for="cb-mesas">Mesas</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-vajilla" name="extras" value="Vajilla" /><label for="cb-vajilla">Vajilla</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-vajilla-desc" name="extras" value="Vajilla descartable" /><label for="cb-vajilla-desc">Vajilla descartable</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-catering" name="extras" value="Catering" /><label for="cb-catering">Catering</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-juegos" name="extras" value="Juegos de mesa" /><label for="cb-juegos">Juegos de mesa</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-inflables" name="extras" value="Inflables" /><label for="cb-inflables">Inflables</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-pochoclos" name="extras" value="Maquina de pochoclos" /><label for="cb-pochoclos">Maquina de pochoclos</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-fotos" name="extras" value="Maquina de fotos" /><label for="cb-fotos">Maquina de fotos</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-dj" name="extras" value="DJ" /><label for="cb-dj">DJ</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-barra" name="extras" value="Barra de tragos" /><label for="cb-barra">Barra de tragos</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-deco" name="extras" value="Decoracion" /><label for="cb-deco">Decoracion</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-camareros" name="extras" value="Camareros" /><label for="cb-camareros">Camareros</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-piso" name="extras" value="Piso para baile" /><label for="cb-piso">Piso para baile</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-animacion" name="extras" value="Animacion" /><label for="cb-animacion">Animacion</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="cb-otro" name="extras" value="Otro" /><label for="cb-otro">Otro</label></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-primary">Enviar consulta</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <p>Consulta enviada. Nos ponemos en contacto a la brevedad.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer">
+    <img class="footer-logo" src="assets/imagenes goji/Logo Goji Png.png" alt="Espacio Goji" />
+    <div class="footer-social">
+      <a href="https://www.instagram.com/espaciogoji/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.facebook.com/EspacioGoji" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://api.whatsapp.com/send/?phone=5491124620629" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </a>
+    </div>
+    <p class="footer-legal">Espacio Goji 2026. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <a class="whatsapp-float" href="https://api.whatsapp.com/send/?phone=5491124620629" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+
+<script>
+    // Video autoplay on scroll
+    const galeriaVideo = document.getElementById('galeriaVideo');
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          galeriaVideo.play();
+        } else {
+          galeriaVideo.pause();
+        }
+      });
+    }, { threshold: 0.3 });
+    videoObserver.observe(galeriaVideo);
+
+    // Mobile nav
+    const toggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('navMobile');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+
+
+    // Lightbox
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      if (!img) return;
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightboxImg').alt = img.alt;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Form
+    document.getElementById('consultaForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const required = this.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(field => {
+        if (!field.value.trim()) {
+          field.style.borderBottomColor = '#b30069';
+          valid = false;
+        } else {
+          field.style.borderBottomColor = '';
+        }
+      });
+      if (!valid) return;
+      document.getElementById('formSuccess').classList.add('visible');
+      this.reset();
+      document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  </script>
+</body>
+</html>
